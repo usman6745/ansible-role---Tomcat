@@ -1,8 +1,15 @@
-Users added were -> tomcat          password: s3cret        role-assigned: manager-gui
+Users added were : ->
+ tomcat
+ password: s3cret
+ role-assigned: manager-gui
 
-deployer        password: deployer      role-assigned: manager-script
+deployer
+password: deployer
+role-assigned: manager-script
                     
-admin           password: admin         roles assigned -> manager-gui, manager-script, manager-jmx,                                                                                     manager-status admin-gui
+admin
+password: admin 
+roles assigned -> manager-gui, manager-script, manager-jmx,                                                                                     manager-status admin-gui
 Ports:
    Port set -> 8081
    url:http://<ip-addr>:8081

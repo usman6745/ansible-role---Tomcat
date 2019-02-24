@@ -1,0 +1,26 @@
+- name: update the ubuntu packages
+  shell: apt-get update -y
+  when: ansible_facts['os_family'] == 'Debian'
+  tags: update_os1
+- name: upgrade the ubuntu os
+  shell: apt-get upgrade -y
+  when: ansible_facts['os_family'] == 'Debian'
+  tags: upgrade_os1
+- name: add PPA Repository for openjdk-8-jdk
+  apt_repository:
+    repo: 'ppa:openjdk-r/ppa'
+  when: ansible_facts['os_family'] == 'Debian'
+  tags: jdk_repo
+- name: install open jdk on ubuntu
+  apt:
+    name: openjdk-8-jdk
+    state: latest
+  when: ansible_facts['os_family'] == 'Debian'
+  tags: installing_openjdk
+- name: Install Tomcat init script on ubuntu
+  copy:
+    src: files/ubuntu-initscript.sh
+    dest: /etc/init.d/tomcat
+    mode: 0755
+  when: ansible_facts['os_family'] == 'Debian'
+

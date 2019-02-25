@@ -1,9 +1,0 @@
----
-- hosts: ubuntu-xenial5
-  user: ansible
-  become: yes
-  become_method: sudo
-  connection: ssh
-  gather_facts: yes
-  roles:
-    - tomcat

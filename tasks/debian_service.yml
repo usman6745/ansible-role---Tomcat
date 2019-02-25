@@ -1,0 +1,5 @@
+- name: nohup to start the service - Debian
+  command: nohup /bin/bash /opt/tomcat/apache-tomcat-8.5.38/bin/startup.sh
+  register: result1
+  when: ansible_facts['os_family'] == 'Debian'
+- debug: var=result1

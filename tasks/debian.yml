@@ -1,0 +1,28 @@
+- name: update the os packages - debian
+  shell: apt-get update -y
+  when: ansible_facts['os_family'] == 'Debian'
+- name: install required pacakges
+  apt: name={{ item }} state=latest
+  with_items:
+    - vim
+    - net-tools
+    - curl
+    - wget
+  when: ansible_facts['os_family'] == 'Debian'
+- name: Install add-apt- repository
+  apt: name=software-properties-common state=latest
+  when: ansible_facts['os_family'] == 'Debian'
+- name: ADD ORACLE JAVA REPOSITORY
+  apt_repository: repo='ppa:webupd8team/java'
+  when: ansible_facts['os_family'] == 'Debian'
+- name: accept java 8 licence
+  debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
+  when: ansible_facts['os_family'] == 'Debian'
+- name: Install Oracle Java 8
+  become: yes
+  apt: name={{ item }} state=latest
+  with_items:
+    - oracle-java8-installer
+    - ca-certificates
+    - oracle-java8-set-default
+  when: ansible_facts['os_family'] == 'Debian'

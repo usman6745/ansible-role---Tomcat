@@ -1,0 +1,6 @@
+- name: nohup to start the service - Redhat
+  command: nohup /bin/bash /opt/tomcat/apache-tomcat-8.5.38/bin/startup.sh
+  register: result2
+  when: ansible_facts['os_family'] == 'RedHat'
+- debug: var=result2
+

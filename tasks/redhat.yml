@@ -1,0 +1,17 @@
+- name: update the os packages - redhat
+  shell: yum update -y
+  when: ansible_facts['os_family'] == 'RedHat'
+- name: install required pacakges
+  yum: name={{ item }} state=latest
+  with_items:
+    - vim
+    - net-tools
+    - curl
+    - wget
+  when: ansible_facts['os_family'] == 'RedHat'
+- name: install open jdk on centos
+  yum:
+    name: java-1.8.0-openjdk
+    state: present
+  when: ansible_facts['os_family'] == 'RedHat'
+  tags: installing_openjdk
